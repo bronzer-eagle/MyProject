@@ -72,7 +72,7 @@
         ng-class='{red : row.State == "Rejected" || row.State == "Failed", green: row.State == "Complete" || row.State == "Accepted", blue: row.State == "Running"}'>
         <td colspan="8">
             <div class="infBox" data-toggle="modal" data-target="#myModal"
-                 ng-click="open('../../Modals/modal1', row.Name)">
+                 ng-click="open('/Modals/modal1.html', row.Name)">
                 <h4>METRICS</h4>
 
                 <div class="arrow">
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="infBox" data-toggle="modal" data-target="#myModal"
-                 ng-click="open('../../Modals/modal2', row.Name)">
+                 ng-click="open('/Modals/modal2.html', row.Name)">
                 <h4>BUILD</h4>
 
                 <div>
@@ -109,7 +109,7 @@
             </div>
 
 
-            <div class="infBox" ng-click="open('../../Modals/modal3', row.Name)">
+            <div class="infBox" ng-click="open('/Modals/modal3.html', row.Name)">
                 <h4>UNIT TEST</h4>
 
                 <div class="diagram">
@@ -127,7 +127,7 @@
 
 
             <div class="infBox" data-toggle="modal" data-target="#myModal"
-                 ng-click="open('../../Modals/modal4', row.Name)">
+                 ng-click="open('/Modals/modal4.html', row.Name)">
                 <h4>FUNCTIONAL TEST</h4>
 
                 <div class="diagram">
