@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h4 class="modal-title">UNIT TEST</h4>
+</div>
+<div class="modal-body">
+    <div class="toCentre">
+        <div class="diagram">
+            <canvas id="pie" class="chart chart-pie" width="150" height="150" data="ModalObj.UnitTest" labels="labels"
+                    colours="Colours">
+            </canvas>
+        </div>
+    </div>
+    <div class="perCent"><span>{{ModalObj.Commit.UnitTest['TestPassed']}}%</span><br>Test passed</div>
+    <div class="toCentre">
+        <div class="prbar">
+            <progressbar animate="false" value="row.Commit.UnitTest['CodeCovered']" max="100" type=""><b>{{ModalObj.Commit.UnitTest['CodeCovered']}}%</b>
+            </progressbar>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="CloseModal()">OK</button>
+</div>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="CheckPointApp">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="IMG/favicon.ico" type="image/x-icon">
+    <title>CheckPoint Application</title>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <link rel='stylesheet' href='bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css'
+          media='all'/>
+    <script type='text/javascript' src='bower_components/angular-loading-bar/build/loading-bar.min.js'></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <script src="JS/main.js"></script>
+    <script src="JS/Controllers/Factory.js"></script>
+    <script src="JS/Controllers/JSON_controller.js"></script>
+</head>
+
+
+<body ng-controller="myController">
+<button ng-click="Start(0, 0)" type="button" class="Mybutton">START</button>
+
+<table class="table table-striped">
+    <tr id="headTr">
+        <td>Changelist / Build</td>
+        <td>Owner</td>
+        <td>Time Started</td>
+        <td>State</td>
+        <td>Metrics</td>
+        <td>Build</td>
+        <td>Unit Test</td>
+        <td>Functional Test</td>
+    </tr>
+
+    <tbody>
+    <tr id="mainTr" ng-repeat-start="row in Objects" ng-click="Clicker(row.Name)"
+        ng-class='{red : row.State == "Rejected" || row.State == "Failed", green: row.State == "Complete" || row.State == "Accepted", blue: row.State == "Running"}'>
+        <td><img src='{{row.Image}}'>{{row.Name}}</td>
+        <td>{{row.Owner}}</td>
+        <td>{{row.TimeSt}}</td>
+        <td>{{row.State}}</td>
+        <td width="100px">
+            <progressbar animate="false" value="row.Timer[0]" max="100" type="{{row.RowColor[0]}}">
+                <b>{{row.Timer[0]}}</b></progressbar>
+        </td>
+        <td width="100px">
+            <progressbar animate="false" value="row.Timer[1]" max='100' type="{{row.RowColor[1]}}">
+                <b>{{row.Timer[1]}}</b></progressbar>
+        </td>
+        <td width="100px">
+            <progressbar animate="false" value="row.Timer[2]" max='100' type="{{row.RowColor[2]}}">
+                <b>{{row.Timer[2]}}</b></progressbar>
+        </td>
+        <td width="100px">
+            <progressbar animate="false" value="row.Timer[3]" max='100' type="{{row.RowColor[3]}}">
+                <b>{{row.Timer[3]}}</b></progressbar>
+        </td>
+    </tr>
+
+
+    <tr ng-repeat-end ng-show="row.ShowHide"
+        ng-class='{red : row.State == "Rejected" || row.State == "Failed", green: row.State == "Complete" || row.State == "Accepted", blue: row.State == "Running"}'>
+        <td colspan="8">
+            <div class="infBox" data-toggle="modal" data-target="#myModal"
+                 ng-click="open('../../Modals/modal1', row.Name)">
+                <h4>METRICS</h4>
+
+                <div class="arrow">
+                    <div>
+                        <img src="{{row.IMGMETR[0]}}">
+                        <span class="imgmetr">{{row.Commit.Metrics.Test}}</span>
+                    </div>
+                    <div>
+
+                        <img src="{{row.IMGMETR[1]}}"><span class="imgmetr">{{row.Commit.Metrics.Mainability}}</span>
+                    </div>
+                    <div>
+
+                        <img src="{{row.IMGMETR[2]}}"><span class="imgmetr">{{row.Commit.Metrics.Security}}</span>
+                    </div>
+                    <div>
+
+                        <img src="{{row.IMGMETR[3]}}"> <span class="imgmetr">{{row.Commit.Metrics.Workmanship}}</span>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="infBox" data-toggle="modal" data-target="#myModal"
+                 ng-click="open('../../Modals/modal2', row.Name)">
+                <h4>BUILD</h4>
+
+                <div>
+                    <img ng-class="{opac: row.Commit.Build.Debug == false}" src="IMG/computer-md.png">
+                    <img ng-class="{opac: row.Commit.Build.Release == false}" src="IMG/computer-md.png">
+                </div>
+                <span class="debug">Debug</span><span>Release</span>
+                <span class="time">{{row.Commit.Build.Timefin}}</span>
+            </div>
+
+
+            <div class="infBox" ng-click="open('../../Modals/modal3', row.Name)">
+                <h4>UNIT TEST</h4>
+
+                <div class="diagram">
+                    <canvas id="pie" class="chart chart-pie" width="150" height="150" data="row.UnitTest"
+                            labels="labels">
+                    </canvas>
+
+                </div>
+                <div class="perCent"><span>{{row.Commit.UnitTest['TestPassed']}}%</span><br>Test passed</div>
+                <div class="prbar">
+                    <progressbar animate="false" value="row.Commit.UnitTest['CodeCovered']" max="100" type=""><b>{{row.Commit.UnitTest['CodeCovered']}}%</b>
+                    </progressbar>
+                </div>
+            </div>
+
+
+            <div class="infBox" data-toggle="modal" data-target="#myModal"
+                 ng-click="open('../../Modals/modal4', row.Name)">
+                <h4>FUNCTIONAL TEST</h4>
+
+                <div class="diagram">
+                    <canvas id="pie" class="chart chart-pie" width="150" height="150" data="row.FunctionalTest"
+                            labels="labels" colours="Colours">
+                    </canvas>
+                </div>
+                <div class="perCent"><span>{{row.Commit.FunctionalTest['TestPassed']}}%</span><br>Test passed</div>
+                <div class="prbar">
+                    <progressbar animate="false" value="row.Commit.FunctionalTest['CodeCovered']" max="100" type=""><b>{{row.Commit.FunctionalTest['CodeCovered']}}%</b>
+                    </progressbar>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

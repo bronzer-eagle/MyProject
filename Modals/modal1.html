@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h4 class="modal-title">METRICS</h4>
+</div>
+<div class="modal-body">
+    <div class="toCentre">
+        <div class="arrow">
+            <div>
+                <img src="{{ModalObj.IMGMETR[0]}}">
+                <span class="imgmetr">{{ModalObj.Commit.Metrics.Test}}</span>
+            </div>
+            <div>
+
+                <img src="{{ModalObj.IMGMETR[1]}}"><span class="imgmetr">{{ModalObj.Commit.Metrics.Mainability}}</span>
+            </div>
+            <div>
+
+                <img src="{{ModalObj.IMGMETR[2]}}"><span class="imgmetr">{{ModalObj.Commit.Metrics.Security}}</span>
+            </div>
+            <div>
+
+                <img src="{{ModalObj.IMGMETR[3]}}"> <span class="imgmetr">{{ModalObj.Commit.Metrics.Workmanship}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="CloseModal()">OK</button>
+</div>

@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title">BUILD</h4>
+</div>
+<div class="modal-body">
+    <div class="toCentre">
+
+        <div>
+            <img ng-class="{opac: ModalObj.Commit.Build.Debug == false}" src="IMG/computer-md.png">
+            <img ng-class="{opac: ModalObj.Commit.Build.Release == false}" src="IMG/computer-md.png">
+        </div>
+        <div>
+            <span class="debug">Debug</span><span>Release</span>
+            <h4>Time finished</h4>
+            <span class="time">{{ModalObj.Commit.Build.Timefin}}</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="CloseModal()">OK</button>
+</div>
