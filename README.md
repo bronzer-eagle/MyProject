@@ -20,6 +20,10 @@ Run local server using http-server.cmd in node_modules/.bin/
 
 Using your browser go to localhost:8080
 
+or you may to use server.js, using nodeJS (make sure you use node serve-static)
+
+this one use port:8888
+
 #Click "Start"
 
 
