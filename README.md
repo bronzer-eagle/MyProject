@@ -1,5 +1,8 @@
 # CheckPoint Project
-This is my new project for 10PerCP
+This is my new project for 10PerCP. This web-app download Json files with data from the server, check it and show the result.
+For example we have the app that was checked by many tests. All marks that were got from tests is write downto JSON. Then my app check all this data and if the result is well you will see green row, if no, it will show the problem test.
+
+You can see the work of this app inthe video https://www.youtube.com/watch?v=CEYg8LQ6hNo or install it
 
 #How to install it
 
